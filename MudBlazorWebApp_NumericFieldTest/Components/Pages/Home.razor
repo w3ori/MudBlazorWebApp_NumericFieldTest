@@ -1,0 +1,42 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+@* Test 1 *@
+<MudNumericField @bind-Value="DoubleValue" Variant="Variant.Outlined" Min="0.0" Immediate OnKeyDown="KeyDown" />
+
+<ul>
+    @foreach (var item in tomegek)
+    {
+        <li>@item</li>
+    }
+</ul>
+
+<MudDivider Class="my-5" Style="border-color:red" />
+
+@* Test 2 *@
+<MudNumericField @bind-Value="_immediate" Immediate="true" Label="Immediate" HelperText="@_immediate.ToString()" Variant="Variant.Outlined" />
+
+
+@code {
+    // Test 1
+    // TryMudBlazor: https://try.mudblazor.com/snippet/GYwyFGbZTwQJFfAF
+    List<double> tomegek = new();
+
+    double DoubleValue = 0.0;
+
+    public void KeyDown(KeyboardEventArgs ev)
+    {
+        if (ev.Key == "Enter" && DoubleValue > 0.0)
+        {
+            tomegek.Add(DoubleValue);
+            DoubleValue = 0;
+        }
+    }
+    //
+
+    // Test 2
+    double _immediate;
+    //
+
+}
